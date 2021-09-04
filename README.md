@@ -28,7 +28,8 @@ Projeto de um carro de controle remoto utilizando arduino.
     - [ ] Em baixas velocidades: freiar 
     - [ ] Em altas velocidades: desviar e freiar
 - [ ]  Extras:
-  - [ ]  2 Modos:
-    - [ ]  Manual: usando controle Manual
-    - [ ]  Auto: utilizando o espaço mapeado para escolher e executar a rota mais curta de um ponto a outro
-  - [ ] 
+  - [ ] Modos:
+    - [ ] **Manual**: usando controle Manual
+    - [ ] **Auto**: utilizando o espaço mapeado para escolher e executar a rota mais curta de um ponto a outro
+      - [ ] Se mover seguindo o dedo em um Mapa no tablet
+      - [ ] Executar um trajeto traçado
