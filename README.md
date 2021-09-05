@@ -21,8 +21,8 @@ Projeto de um carro de controle remoto utilizando arduino.
 
 > ### ***Funções/Sistema (Software) :***
 - [ ] Essenciais:
-  - [ ] Controle Manual via Bluetooth
-  - [ ] Ativar/Desativar Sistema anti-Batidas
+  - [x] Controle Manual
+  - [ ] Implementar controle via bluetooth
   - [ ] Velocímetro
   - [ ] "Sistema anti-Batidas":
     - [ ] Em baixas velocidades: freiar 
@@ -30,6 +30,6 @@ Projeto de um carro de controle remoto utilizando arduino.
 - [ ]  Extras:
   - [ ] Modos:
     - [ ] **Manual**: usando controle Manual
-    - [ ] **Auto**: utilizando o espaço mapeado para escolher e executar a rota mais curta de um ponto a outro
+    <!-- - [ ] **Auto**: utilizando o espaço mapeado para escolher e executar a rota mais curta de um ponto a outro
       - [ ] Se mover seguindo o dedo em um Mapa no tablet
-      - [ ] Executar um trajeto traçado
+      - [ ] Executar um trajeto traçado -->
