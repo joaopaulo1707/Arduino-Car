@@ -2,7 +2,7 @@
 
 // --> --> --> --> GLOBAL VARIABLES <-- <-- <-- <-- 
 int direction_status = 0;
-int acceleration_status = 1;
+int acceleration_status = 0;
 int acceleration_time = 0;
 
 // --> --> --> --> MOTORS <-- <-- <-- <--
@@ -21,9 +21,8 @@ int setupmotors() {
 }
 
 int movemotors() {
-    
     if (acceleration_status == 1 || acceleration_status == -1) {
-        acceleration_time = acceleration_time < 255 ? acceleration_time + 2 : 255;
+        acceleration_time = acceleration_time < 255 ? acceleration_time + 3 : 255;
     } else {
         acceleration_time = 0;
     }
@@ -35,7 +34,6 @@ int movemotors() {
     digitalWrite(RELAY_PIN, acceleration_status == 1 ? HIGH : LOW);
     delay(15);
 }
-
 
 // --> --> --> --> Running Section <-- <-- <-- <--
 void setup() {
