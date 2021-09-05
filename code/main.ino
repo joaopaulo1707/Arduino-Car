@@ -33,7 +33,7 @@ int movemotors() {
     servo_motor.write(90 + 90*direction_status);
     delay(15);
     digitalWrite(RELAY_PIN, acceleration_status == 1 ? HIGH : LOW);
-	delay(15);
+    delay(15);
 }
 
 
