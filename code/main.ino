@@ -12,7 +12,6 @@ int DCMOTOR_PIN = 10;
 int RELAY_PIN = 9;
 
 int setupmotors() {
-    pinMode(SERVO_PIN, OUTPUT);
     pinMode(DCMOTOR_PIN, OUTPUT);
     pinMode(RELAY_PIN, OUTPUT);
 
@@ -22,7 +21,7 @@ int setupmotors() {
 
 int movemotors() {
     if (acceleration_status == 1 || acceleration_status == -1) {
-        acceleration_time = acceleration_time < 255 ? acceleration_time + 3 : 255;
+        acceleration_time = acceleration_time < 255 ? acceleration_time + 4 : 255;
     } else {
         acceleration_time = 0;
     }
@@ -31,7 +30,7 @@ int movemotors() {
     delay(15);
     servo_motor.write(90 + 90*direction_status);
     delay(15);
-    digitalWrite(RELAY_PIN, acceleration_status == 1 ? HIGH : LOW);
+    digitalWrite(RELAY_PIN, acceleration_status == 1 || acceleration_status == -1 ? LOW : HIGH);
     delay(15);
 }
 

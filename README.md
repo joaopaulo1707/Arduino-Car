@@ -1,35 +1,20 @@
-# **Arduino - Car**
-
-Projeto de um carro de controle remoto utilizando arduino.
-
-## ***Task List***
+## ***Task List :***
 ---
-> ### ***Materiais/Peças (Hardware) :***
-- [ ] Essenciais:
-  - [x] 2 Motores DC
-  - [x] 1 Motor Servo
-  - [x] 4 Rodas
-  - [x] Arduino
-  - [x] Protoboards
-  - [x] Jumpers 
-  - [ ] Bateria
-  - [ ] Modulo Bluetooth
-  - [ ] Base, Eixos, ...
-- [ ] Extras:
-  - [ ] 2 Sensores Ultrassônicos
-  - [x] 1 Speaker
 
-> ### ***Funções/Sistema (Software) :***
-- [ ] Essenciais:
-  - [x] Controle Manual
-  - [ ] Implementar controle via bluetooth
-  - [ ] Velocímetro
-  - [ ] "Sistema anti-Batidas":
-    - [ ] Em baixas velocidades: freiar 
-    - [ ] Em altas velocidades: desviar e freiar
-- [ ]  Extras:
-  - [ ] Modos:
-    - [ ] **Manual**: usando controle Manual
-    <!-- - [ ] **Auto**: utilizando o espaço mapeado para escolher e executar a rota mais curta de um ponto a outro
-      - [ ] Se mover seguindo o dedo em um Mapa no tablet
-      - [ ] Executar um trajeto traçado -->
+## ***Funções Implementadas :***
+> ### ***Movimentação :***
+  - [x] [Servo](https://www.tinkercad.com/things/0cxHovpFquX-sizzling-wluff/editel?sharecode=uqz5r2EFh7k0OxW2Ga00D9VSr1_-p_cgHJ5vNY7XMXQ)
+  - [x] [Motor DC](https://www.tinkercad.com/things/8hWncvw12ff-shiny-jofo/editel?sharecode=OviEyD280ZwKB9zwhMP9ShJB66Xw35zrHPdu_P4tYTg)
+  - [ ] [Sistema anti-Batidas]()
+  - [ ] ...
+  
+> ### ***Controle Bluetooth :***
+  - [ ] [Controle Virtual]()
+  - [ ] [Alternar entre Modos]()
+  - [ ] ..
+
+> ### ***Modos de Controle :***
+  - [ ] [Manual (via Controle Bluetooth)]()
+  - [ ] [Manual (via Celular com Giroscopio)]()
+  - [ ] ["Automático" (se movendo sozinho utilizando sensores)]()
+  - [ ] ...
