@@ -1,46 +1,55 @@
 #include <Servo.h>
 
-// --> --> --> --> GLOBAL VARIABLES <-- <-- <-- <-- 
-int direction_status = 0;
-int acceleration_status = 0;
-int acceleration_time = 0;
+// --> --> --> --> GLOBAL VARIABLES <-- <-- <-- <--
+int motors_variables[] = {0, 0, 0}; // {direction_status, acceleration_status, acceleration_time}
+float distances[] = {0, 0}; // {front_distance, back_distance}
 
 // --> --> --> --> MOTORS <-- <-- <-- <--
 Servo servo_motor;
-int SERVO_PIN = 11;
-int DCMOTOR_PIN = 10;
-int RELAY_PIN = 9;
+int MOTORS_PINS[] = {11, 10, 9}; // {SERVO_PIN, DCMOTOR_PIN, RELAY_PIN}
 
-int setupmotors() {
-    pinMode(DCMOTOR_PIN, OUTPUT);
-    pinMode(RELAY_PIN, OUTPUT);
+int setupMotors() {
+    pinMode(MOTORS_PINS[1], OUTPUT); pinMode(MOTORS_PINS[2], OUTPUT);
 
-    servo_motor.attach(SERVO_PIN);
+    servo_motor.attach(MOTORS_PINS[0]);
     servo_motor.write(90);
 }
 
-int movemotors() {
-    if (acceleration_status == 1 || acceleration_status == -1) {
-        acceleration_time = acceleration_time < 255 ? acceleration_time + 4 : 255;
-    } else {
-        acceleration_time = 0;
-    }
+int moveMotors() {
+    if (motors_variables[1] == 1 || motors_variables[1] == -1)
+        motors_variables[2] = motors_variables[2] < 255 ? motors_variables[2] + 4 : 255;
+    else motors_variables[2] = 0;
 
-    analogWrite(DCMOTOR_PIN, acceleration_time);
-    delay(15);
-    servo_motor.write(90 + 90*direction_status);
-    delay(15);
-    digitalWrite(RELAY_PIN, acceleration_status == 1 || acceleration_status == -1 ? LOW : HIGH);
-    delay(15);
+    analogWrite(MOTORS_PINS[1], motors_variables[2]);
+    servo_motor.write(90 + 90*motors_variables[0]);
+    digitalWrite(MOTORS_PINS[2], motors_variables[1] == 1 || motors_variables[1] == -1 ? LOW : HIGH);
+    delayMicroseconds(15);
+}
+
+// --> --> --> --> DISTANCE SENSORS <-- <-- <-- <--
+int DSENSOR_PINS[] = {8, 7}; // {FSENSOR_PIN, BSENSOR_PIN}
+
+int updateDistances() {
+    for (int i = 0; i < 1; i++) {
+        pinMode(DSENSOR_PINS[i], OUTPUT);
+        digitalWrite(DSENSOR_PINS[i], LOW);
+        delayMicroseconds(i);
+        digitalWrite(DSENSOR_PINS[i], HIGH);
+        delayMicroseconds(10);
+        digitalWrite(DSENSOR_PINS[i], LOW);
+        pinMode(DSENSOR_PINS[i], INPUT);
+        distances[i] = 0.0343 * pulseIn(DSENSOR_PINS[i], HIGH) / 2;
+    }
 }
 
 // --> --> --> --> Running Section <-- <-- <-- <--
 void setup() {
-    setupmotors();
+    setupMotors();
 
 }
 
 void loop() {
-    movemotors();
+    updateDistances();
+    moveMotors();
 
 }   
