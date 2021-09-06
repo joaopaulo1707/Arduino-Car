@@ -33,7 +33,7 @@ int updateDistances() {
     for (int i = 0; i < 1; i++) {
         pinMode(DSENSOR_PINS[i], OUTPUT);
         digitalWrite(DSENSOR_PINS[i], LOW);
-        delayMicroseconds(i);
+        delayMicroseconds(2);
         digitalWrite(DSENSOR_PINS[i], HIGH);
         delayMicroseconds(10);
         digitalWrite(DSENSOR_PINS[i], LOW);
