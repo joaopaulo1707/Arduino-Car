@@ -1,12 +1,12 @@
 #include <Servo.h>
 
 // --> --> --> --> GLOBAL VARIABLES <-- <-- <-- <--
-int motors_variables[] = {0, 0, 0}; // {direction_status, acceleration_status, acceleration_time}
-float distances[] = {0, 0}; // {front_distance, back_distance}
+int motors_variables[] = {0, 0, 0}; // {direction, acceleration, acceleration time}
+float distances[] = {0, 0}; // {front distance, back distance}
 
 // --> --> --> --> MOTORS <-- <-- <-- <--
 Servo servo_motor;
-int MOTORS_PINS[] = {11, 10, 9}; // {SERVO_PIN, DCMOTOR_PIN, RELAY_PIN}
+int MOTORS_PINS[] = {11, 10, 9}; // {SERVO PIN, DCMOTOR PIN, RELAY PIN}
 
 int setupMotors() {
     pinMode(MOTORS_PINS[1], OUTPUT); pinMode(MOTORS_PINS[2], OUTPUT);
@@ -21,13 +21,13 @@ int moveMotors() {
     else motors_variables[2] = 0;
 
     analogWrite(MOTORS_PINS[1], motors_variables[2]);
-    servo_motor.write(90 + 90*motors_variables[0]);
+    servo_motor.write(90 + 90 * motors_variables[0]);
     digitalWrite(MOTORS_PINS[2], motors_variables[1] == 1 || motors_variables[1] == -1 ? LOW : HIGH);
     delayMicroseconds(15);
 }
 
 // --> --> --> --> DISTANCE SENSORS <-- <-- <-- <--
-int DSENSOR_PINS[] = {8, 7, 6, 5}; // {FSENSOR_PIN, BSENSOR_PIN}
+int DSENSOR_PINS[] = {8, 7, 6, 5}; // {FSENSOR PIN, BSENSOR PIN}
 
 int setupDSensors() {
     pinMode(DSENSOR_PINS[0], OUTPUT);
@@ -37,7 +37,7 @@ int setupDSensors() {
 }
 
 int updateDistances() {
-    for (int i = 0; i < 3; i+=2) {
+    for (int i = 0; i < 3; i += 2) {
         digitalWrite(DSENSOR_PINS[i], LOW);
         delayMicroseconds(2);
         digitalWrite(DSENSOR_PINS[i], HIGH);
