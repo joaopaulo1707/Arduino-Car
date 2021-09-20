@@ -1,61 +1,59 @@
 #include <Servo.h>
 
-// --> --> --> --> GLOBAL VARIABLES <-- <-- <-- <--
-int motors_variables[] = {0, 0, 0}; // {direction, acceleration, acceleration time}
-float distances[] = {0, 0}; // {front distance, back distance}
+int STATUS_VARIABLES[] = {0, 0, 0}; // {direction, acceleration, colliding}
+float FLOAT_VARIABLES[] = {0}; // {front distance}
 
-// --> --> --> --> MOTORS <-- <-- <-- <--
+// ---> ---> ---> ---> ---> ---> ---> ---> ---> ---> ---> --->
+
+int __MOTORS[] = {13, 12, 11}; // {relay, DCs, servo}
 Servo servo_motor;
-int MOTORS_PINS[] = {11, 10, 9}; // {SERVO PIN, DCMOTOR PIN, RELAY PIN}
 
-int setupMotors() {
-    pinMode(MOTORS_PINS[1], OUTPUT); pinMode(MOTORS_PINS[2], OUTPUT);
-
-    servo_motor.attach(MOTORS_PINS[0]);
-    servo_motor.write(90);
+int SetupMotors() {
+    pinMode(__MOTORS[0], OUTPUT); pinMode(__MOTORS[1], OUTPUT);
+    servo_motor.attach(__MOTORS[2]);
 }
 
-int moveMotors() {
-    if (motors_variables[1] == 1 || motors_variables[1] == -1)
-        motors_variables[2] = motors_variables[2] < 255 ? motors_variables[2] + 4 : 255;
-    else motors_variables[2] = 0;
-
-    analogWrite(MOTORS_PINS[1], motors_variables[2]);
-    servo_motor.write(90 + 90 * motors_variables[0]);
-    digitalWrite(MOTORS_PINS[2], motors_variables[1] == 1 || motors_variables[1] == -1 ? LOW : HIGH);
-    delayMicroseconds(15);
-}
-
-// --> --> --> --> DISTANCE SENSORS <-- <-- <-- <--
-int DSENSOR_PINS[] = {8, 7, 6, 5}; // {FSENSOR PIN, BSENSOR PIN}
-
-int setupDSensors() {
-    pinMode(DSENSOR_PINS[0], OUTPUT);
-    pinMode(DSENSOR_PINS[1], INPUT);
-    pinMode(DSENSOR_PINS[2], OUTPUT);
-    pinMode(DSENSOR_PINS[3], INPUT);
-}
-
-int updateDistances() {
-    for (int i = 0; i < 3; i += 2) {
-        digitalWrite(DSENSOR_PINS[i], LOW);
-        delayMicroseconds(2);
-        digitalWrite(DSENSOR_PINS[i], HIGH);
-        delayMicroseconds(10);
-        digitalWrite(DSENSOR_PINS[i], LOW);
-        distances[i] = 0.0343 * pulseIn(DSENSOR_PINS[i + 1], HIGH) / 2;
+int MoveMotors() {
+    if (STATUS_VARIABLES[2] == 0) {
+        digitalWrite(__MOTORS[0], STATUS_VARIABLES[1] == 1 ? HIGH : LOW);
+        digitalWrite(__MOTORS[1], abs(STATUS_VARIABLES[1]));
+        servo_motor.write(90 * (1 + STATUS_VARIABLES[0]));
+    } else if (STATUS_VARIABLES[2] == 1) {
+        digitalWrite(__MOTORS[0], HIGH);
+        digitalWrite(__MOTORS[1], HIGH);
+        servo_motor.write(180);
     }
+    delay(15);
 }
 
-// --> --> --> --> Running Section <-- <-- <-- <--
-void setup() {
-    setupMotors();
-    setupDSensors();
+// ---> ---> ---> ---> ---> ---> ---> ---> ---> ---> ---> --->
 
+int __SENSORS[] = {10, 9}; // {trigger, echo}
+
+int SetupSensors() {
+	pinMode(__SENSORS[0], OUTPUT);
+	pinMode(__SENSORS[1], INPUT);
 }
 
-void loop() {
-    updateDistances();
-    moveMotors();
+int UpdateSensors() {
+    digitalWrite(__SENSORS[0], LOW);
+    delayMicroseconds(5);        
+    digitalWrite(__SENSORS[0], HIGH);  
+    delayMicroseconds(10);      
+    digitalWrite(__SENSORS[0], LOW);
+    FLOAT_VARIABLES[0] = pulseIn(__SENSORS[1], HIGH) / 58
+}
 
-}   
+// ---> ---> ---> ---> ---> ---> ---> ---> ---> ---> ---> --->
+
+void setup()
+{
+    SetupMotors();
+    SetupSensors();
+}
+
+void loop()
+{
+    MoveMotors();
+    UpdateSensors();
+}
