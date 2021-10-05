@@ -41,7 +41,7 @@ int UpdateSensors() {
     digitalWrite(__SENSORS[0], HIGH);  
     delayMicroseconds(10);      
     digitalWrite(__SENSORS[0], LOW);
-    FLOAT_VARIABLES[0] = pulseIn(__SENSORS[1], HIGH) / 58
+    FLOAT_VARIABLES[0] = pulseIn(__SENSORS[1], HIGH) / 58;
 }
 
 // ---> ---> ---> ---> ---> ---> ---> ---> ---> ---> ---> --->
