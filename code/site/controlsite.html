@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Control for Arduino Car </title>
+    <style>
+        body {
+            display: flex; flex-flow: column;
+            justify-content: center; place-items: center;
+            width: 100vw; height: 100vh;
+            padding: 0px; margin: 0px;
+            background-color: #333;
+        }
+
+        * { border-radius: 5px}
+
+        section {
+            display: flex; flex-flow: row nowrap;
+            justify-content: space-between; place-items: center;
+            width: calc(100vw - 20px); height: calc(50vh - 20px);
+            margin: 5px; padding: 5px;
+            background-color: #444;
+        }
+        section > div.control {
+            display: flex; place-items: center;
+            width: calc(50vh - 30px); height: calc(100% - 10px);
+            margin: 0px; padding: 5px;
+            background-color: #555;
+        }
+
+        section > div.control#FB { flex-direction: column;}
+        section > div.control#LR { flex-direction: row;}
+
+        section > div.control > div.button {
+            display: flex; justify-content: center; place-items: center;
+            width: calc(25vh - 40px); height: calc(25vh - 40px);
+            margin: 5px; padding: 5px;
+            background-color: #333; color: #222;
+            text-align: center; font-size: 300%;
+        }
+
+        section > div.control > div.button:active {
+            background-color: #444; color: #FFF;
+        }
+
+        section div#information {
+            width: calc(100% - 2*(50vh - 20px) - 20px); height: calc(100% - 10px);
+            margin: 0px 5px 0px 5px; padding: 5px;
+            background-color: #333;
+        }
+    </style>
+</head>
+<body>
+    <section id="controls">
+        <div class="control" id="FB">
+            <div class="button" id="F"> &uArr; </div>
+            <div class="button" id="B"> &dArr; </div>
+        </div>
+        <div id="information">
+
+        </div>
+        <div class="control" id="LR">
+            <div class="button" id="L"> &lArr; </div>
+            <div class="button" id="R"> &rArr; </div>
+        </div>
+
+    </section>
+    <section id="extras"></section>
+</body>
+</html>
