@@ -1,14 +1,16 @@
-#include "./motors/motors.h"
-#include "./sensors/sensors.h"
+#include <motors.h>
+#include <sensors.h>
 
-// Variables
+// --> --> --> --> --> --> --> --> Variables
+
 int time = 0;
 char junk;
 String inputString = "";
 
-Motors controler({5, 4, 3, 2, 6, 9, A0, A1});
-Sensors sensors({12, 13});
+Motors controler(5, 4, 3, 2, 6, 9, A0, A1);
+Sensors sensors(12, 13);
 
+// --> --> --> --> --> --> --> --> Working
 void setup()
 {
     Serial.begin(9600);
@@ -20,7 +22,7 @@ void loop()
             inputString += (char)Serial.read();
         };
         Serial.println(inputString);
-        while (Serial.available() > 0 ) {
+        while (Serial.available()) {
             junk = Serial.read();
         };
         if (inputString == "F") { controler.front(); }
@@ -30,7 +32,6 @@ void loop()
         inputString = "";
     }
     if (time % 20 == 0) { controler.update(); };
-    if (time % 50 == 0) { sensors.update(); };
+    if (time % 20 == 0) { sensors.update(); };
     time += 1;
 };
-

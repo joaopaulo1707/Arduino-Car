@@ -1,8 +1,3 @@
-#define LOW 0
-#define HIGH 1
-#define INPUT 0
-#define OUTPUT 1
-
 #include "motors.h"
 
 Motors::Motors(int in1, int in2, int in3, int in4, int enA, int enB, int s1, int s2) {
@@ -12,13 +7,15 @@ Motors::Motors(int in1, int in2, int in3, int in4, int enA, int enB, int s1, int
     this->enA=enA; this->enB=enB;
     this->s1=s1; this->s2=s2;
     init();
-}
+};
 void Motors::init() {
     pinMode(in1, OUTPUT); pinMode(in2, OUTPUT);
     pinMode(in3, OUTPUT); pinMode(in4, OUTPUT);
     pinMode(enA, OUTPUT); pinMode(enB, OUTPUT);
     this->servo1.attach(this->s1); this->servo2.attach(this->s2);
-    this->values[] = {0, 0, 0, 0, 0, 512}; // in1,..., in4, speed(enA, enB), angle
+    this->values[0] = LOW; this->values[1] = LOW;
+    this->values[2] = LOW; this->values[3] = LOW;
+    this->values[4] = 0; this->values[5] = 90;
     update();
 };
 void Motors::update() {
@@ -41,5 +38,5 @@ void Motors::left() {
     this->values[5] = 0;
 };
 void Motors::right() {
-    this->values[5] = 1024;
+    this->values[5] = 180;
 };
