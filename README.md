@@ -4,8 +4,6 @@ Projeto utilizando Arduino para o [_Instituto Esperança de Ensino Superior_](ht
 
 ## **_Objetivos Principais:_**
 
----
-
 -   ### **_Comandos Básicos:_**
 
     1. **_Frente e Trás:_**
@@ -17,6 +15,7 @@ Projeto utilizando Arduino para o [_Instituto Esperança de Ensino Superior_](ht
         - [ ] Dependendo do controle ligar o motor certo para fazer a curva.
 
     3. **_Implementar Controle Bluetooth:_**
+
         - [ ] Usar Módulo Bluetooth.
         - [ ] Sincronizar o controle com o código principal
 
